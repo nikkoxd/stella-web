@@ -64,14 +64,14 @@ export default async function DashboardLayout({
   const imageHash = userData.avatar;
   const imageURL = `https://cdn.discordapp.com/avatars/${userID}/${imageHash}.png`;
 
-  const userGuildsData: Guild[] = await getUserGuilds(accessToken.value);
-  const guild = userGuildsData.find(item => { return item.id === process.env.GUILD_ID });
+  // const userGuildsData: Guild[] = await getUserGuilds(accessToken.value);
+  // const guild = userGuildsData.find(item => { return item.id === process.env.GUILD_ID });
 
-  if (guild) {
-    if (!hasAdministratorPermissions(guild)) {
-      redirect("/");
-    }
-  }
+  // if (guild) {
+  //   if (!hasAdministratorPermissions(guild)) {
+  //     redirect("/");
+  //   }
+  // }
 
   return (
     <div className="min-h-screen">
