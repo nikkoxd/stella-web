@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Guild } from "../../types/guild";
 import NoPermissions from "../no_permissions";
+import MainForm from "./mainForm";
 
 export default async function Config() {
   async function getUserGuildsData(accessToken: string) {
@@ -14,7 +15,6 @@ export default async function Config() {
 
     if (!response.ok) {
       if (response.status == 401 || response.status == 403 || response.status == 429) {
-        console.log(response.headers);
         redirect("/error/too_many_requests");
       }
       redirect("/api/auth/discord/redirect");
@@ -25,8 +25,6 @@ export default async function Config() {
 
   const cookieStore = cookies();
   const accessToken = cookieStore.get("access_token");
-
-  console.log(accessToken);
 
   if (!accessToken) {
     redirect("/api/auth/discord/redirect");
@@ -51,10 +49,7 @@ export default async function Config() {
         <Link href="#" className="underline">Economy</Link>
         <Link href="#" className="underline">Experience</Link>
       </nav>
-      <div>
-        <p>Language</p>
-        <p>Logging channel</p>
-      </div>
+      <MainForm />
     </>
   )
 }
