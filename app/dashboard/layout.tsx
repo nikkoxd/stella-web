@@ -12,8 +12,13 @@ async function getUserGuildsData(accessToken: string) {
   });
 
   if (!response.ok) {
+    if (response.status == 401 || response.status == 403 || response.status == 429) {
+      redirect("/error/too_many_requests");
+    }
     redirect("/api/auth/discord/redirect");
   }
+
+  return response.json();
 };
 
 async function getUserData(accessToken: string) {
@@ -24,8 +29,13 @@ async function getUserData(accessToken: string) {
   })
 
   if (!response.ok) {
+    if (response.status == 401 || response.status == 403 || response.status == 429) {
+      redirect("/error/too_many_requests");
+    }
     redirect("/api/auth/discord/redirect");
   }
+
+  return response.json();
 };
 
 export default async function DashboardLayout({
