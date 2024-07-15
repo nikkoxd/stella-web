@@ -23,7 +23,7 @@ async function exchangeCode(code: string) {
   return data;
 };
 
-async function refreshToken(refreshToken: RequestCookie) {
+async function refreshToken(refreshToken: string) {
   const response = await fetch("https://discord.com/api/oauth2/token", {
     method: "POST",
     headers: {
@@ -33,7 +33,7 @@ async function refreshToken(refreshToken: RequestCookie) {
       "client_id": process.env.CLIENT_ID as string,
       "client_secret": process.env.CLIENT_SECRET as string,
       "grant_type": "refresh_token",
-      "refresh_token": refreshToken.value,
+      "refresh_token": refreshToken,
     })
   });
 
@@ -53,8 +53,8 @@ export async function GET(request: NextRequest) {
 
   if (code) {
     data = await exchangeCode(code);
-  } else if (refreshTokenCookie) {
-    data = await refreshToken(refreshTokenCookie);
+  } else if (refreshTokenCookie?.value) {
+    data = await refreshToken(refreshTokenCookie.value);
   } else {
     redirect(process.env.OAUTH2_URI as string);
   }

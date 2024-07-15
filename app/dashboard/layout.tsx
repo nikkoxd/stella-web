@@ -14,8 +14,6 @@ async function getUserGuildsData(accessToken: string) {
   if (!response.ok) {
     redirect("/api/auth/discord/redirect");
   }
-
-  return response.json();
 };
 
 async function getUserData(accessToken: string) {
@@ -28,8 +26,6 @@ async function getUserData(accessToken: string) {
   if (!response.ok) {
     redirect("/api/auth/discord/redirect");
   }
-
-  return response.json();
 };
 
 export default async function DashboardLayout({
