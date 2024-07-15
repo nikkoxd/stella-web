@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Guild } from "../../types/guild";
+import NoPermissions from "../no_permissions";
 
 export default async function Config() {
   async function getUserGuildsData(accessToken: string) {
@@ -37,10 +38,12 @@ export default async function Config() {
     return guild.id == process.env.GUILD_ID;
   });
 
+  // Check if user has Administrator permissions
   const isAdmin = (filteredGuildData[0].permissions_new & 8) !== 0;
+  if (!isAdmin) return <NoPermissions />
 
   return (
-    <main className="p-4">
+    <>
       <h1 className="text-2xl font-bold">Server config</h1>
       <nav className="flex items-center gap-2">
         <Link href="#" className="underline">Main</Link>
@@ -51,8 +54,7 @@ export default async function Config() {
       <div>
         <p>Language</p>
         <p>Logging channel</p>
-        <p>{isAdmin}</p>
       </div>
-    </main>
+    </>
   )
 }

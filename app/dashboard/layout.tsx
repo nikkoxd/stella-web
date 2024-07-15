@@ -8,7 +8,9 @@ export default async function DashboardLayout({
   return (
     <div className="min-h-screen">
       <Header />
-      {children}
+      <main className="p-4">
+        {children}
+      </main>
     </div>
   )
 }
