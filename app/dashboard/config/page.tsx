@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import Link from "next/link";
 import { Guild } from "../../types/guild";
+import Link from "next/link";
 import NoPermissions from "../no_permissions";
 import MainForm from "./mainForm";
 
@@ -15,6 +15,7 @@ export default async function Config() {
 
     if (!response.ok) {
       if (response.status == 401 || response.status == 403 || response.status == 429) {
+        console.log(response.status);
         redirect("/error/too_many_requests");
       }
       redirect("/api/auth/discord/redirect");
