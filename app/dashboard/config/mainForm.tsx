@@ -26,7 +26,7 @@ export default async function MainForm() {
     <form className="w-1/2 space-y-2" action={updateConfig} >
       <div className="grid grid-cols-2 items-center">
         <label htmlFor="language">Language</label>
-        <select className="px-2 py-1 border border-gray-400 rounded" name="language" defaultValue={guild.language}>
+        <select className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" name="language" defaultValue={guild.language}>
           <option value="ru">Русский</option>
           <option value="en">English</option>
         </select>
@@ -34,20 +34,20 @@ export default async function MainForm() {
 
       <div className="grid grid-cols-2 items-center">
         <label htmlFor="logChannel">Log Channel ID</label>
-        <input className="px-2 py-1 border border-gray-400 rounded" type="text" name="logChannel" defaultValue={guild.logChannel} />
+        <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="logChannel" defaultValue={guild.logChannel} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
         <label htmlFor="embedColor">Embed Color</label>
-        <input className="px-2 py-1 border border-gray-400 rounded" type="text" name="embedColor" defaultValue={guild.embedColor} />
+        <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="embedColor" defaultValue={guild.embedColor} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
         <label htmlFor="memberRoleId">Member Role ID</label>
-        <input className="px-2 py-1 border border-gray-400 rounded" type="text" name="memberRoleId" defaultValue={guild.memberRoleId} />
+        <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="memberRoleId" defaultValue={guild.memberRoleId} />
       </div>
 
-      <button className="px-2 py-1 bg-black text-white rounded" type="submit">Submit</button>
+      <button className="px-2 py-1 bg-black dark:bg-white text-white dark:text-black rounded" type="submit">Submit</button>
     </form>
   ) 
 }
