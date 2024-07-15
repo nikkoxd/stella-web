@@ -1,22 +1,22 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { Guild } from "../types/guild";
 import Image from "next/image";
 import Link from "next/link";
 
-type Guild = {
-  id: string,
-  name: string,
-  icon: string,
-  banner: string,
-  owner: boolean,
-  permissions: number,
-  permissions_new: string,
-  features: string[],
-};
+async function getUserGuildsData(accessToken: string) {
+  const response = await fetch("https://discord.com/api/users/@me/guilds", {
+    headers: {
+      "Authorization": `Bearer ${accessToken}`
+    }
+  });
 
-function hasAdministratorPermissions(guild: Guild) {
-  return (Number(guild.permissions_new) & 8) != 0
-}
+  if (!response.ok) {
+    redirect("/api/auth/discord/redirect");
+  }
+
+  return response.json();
+};
 
 async function getUserData(accessToken: string) {
   const response = await fetch("https://discord.com/api/users/@me", {
@@ -29,21 +29,7 @@ async function getUserData(accessToken: string) {
     redirect("/api/auth/discord/redirect");
   }
 
-  const data = await response.json();
-  
-  return data;
-};
-
-async function getUserGuilds(accessToken: string) {
-  const response = await fetch("https://discord.com/api/users/@me/guilds", {
-    headers: {
-      "Authorization": `Bearer ${accessToken}`
-    }
-  });
-
-  const data = await response.json();
-
-  return data;
+  return response.json();
 };
 
 export default async function DashboardLayout({
@@ -64,14 +50,13 @@ export default async function DashboardLayout({
   const imageHash = userData.avatar;
   const imageURL = `https://cdn.discordapp.com/avatars/${userID}/${imageHash}.png`;
 
-  // const userGuildsData: Guild[] = await getUserGuilds(accessToken.value);
-  // const guild = userGuildsData.find(item => { return item.id === process.env.GUILD_ID });
+  const guildData = await getUserGuildsData(accessToken.value);
 
-  // if (guild) {
-  //   if (!hasAdministratorPermissions(guild)) {
-  //     redirect("/");
-  //   }
-  // }
+  const filteredGuildData = guildData.filter((guild: Guild) => {
+    return guild.id == process.env.GUILD_ID;
+  });
+
+  const isAdmin = (filteredGuildData[0].permissions_new & 8) !== 0;
 
   return (
     <div className="min-h-screen">
@@ -93,6 +78,8 @@ export default async function DashboardLayout({
           <Image src={imageURL} width={50} height={50} className="rounded-full" alt="User avatar" />
         </div>
       </header>
+
+      {isAdmin.toString()}
 
       {children}
     </div>
