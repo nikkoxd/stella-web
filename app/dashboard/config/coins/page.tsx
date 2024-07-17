@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import Guild, { IGuild } from "@/models/Guild";
+import Guild from "@/models/Guild";
 import { headers } from "next/headers";
 
 export default async function CoinsForm() {
@@ -25,22 +25,22 @@ export default async function CoinsForm() {
   return (
     <form className="w-1/2 space-y-2" action={updateConfig} >
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="cooldown">Cooldown</label>
+        <label htmlFor="cooldown">Время между наградами</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="cooldown" defaultValue={guild.coins.cooldown} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="min">Minimum value</label>
+        <label htmlFor="min">Минимальная награда</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="number" name="min" defaultValue={guild.coins.min} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="max">Maximum value</label>
+        <label htmlFor="max">Максимальная награда</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="number" name="max" defaultValue={guild.coins.max} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="bumpReward">Bump reward</label>
+        <label htmlFor="bumpReward">Награда за бампы</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="number" name="bumpReward" defaultValue={guild.coins.bumpReward} />
       </div>
 

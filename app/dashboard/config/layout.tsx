@@ -43,14 +43,14 @@ export default async function ConfigLayout({ children }: { children: React.React
 
   return (
     <>
-      <h1 className="text-2xl font-bold">Server config</h1>
-      <nav className="flex items-center gap-2">
-        <Link href="/dashboard/config/main" className="underline">Main</Link>
-        <Link href="/dashboard/config/welcome" className="underline">Welcoming</Link>
-        <Link href="/dashboard/config/reactions" className="underline">Reactions</Link>
-        <Link href="/dashboard/config/coins" className="underline">Economy</Link>
-        <Link href="/dashboard/config/exp" className="underline">Experience</Link>
-        <Link href="/dashboard/config/rooms" className="underline">Private rooms</Link>
+      <h1 className="text-2xl font-bold">Конфиг сервера</h1>
+      <nav className="mb-2 flex items-center gap-2">
+        <Link href="/dashboard/config/main" className="underline">Основное</Link>
+        <Link href="/dashboard/config/welcome" className="underline">Приветствия</Link>
+        <Link href="/dashboard/config/reactions" className="underline">Голосования</Link>
+        <Link href="/dashboard/config/coins" className="underline">Экономика</Link>
+        <Link href="/dashboard/config/exp" className="underline">Опыт</Link>
+        <Link href="/dashboard/config/rooms" className="underline">VIP-Зал</Link>
       </nav>
       { children }
     </>

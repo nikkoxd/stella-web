@@ -25,17 +25,17 @@ export default async function RoomsForm() {
   return (
     <form className="w-1/2 space-y-2" action={updateConfig} >
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="category">Category</label>
+        <label htmlFor="category">ID категории</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="category" defaultValue={guild.rooms.category} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="prefix">Room name prefix</label>
+        <label htmlFor="prefix">Префикс названия комнаты</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="prefix" defaultValue={guild.rooms.prefix} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="price">Price per hour</label>
+        <label htmlFor="price">Стоимость в час</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="number" name="price" defaultValue={guild.rooms.price} />
       </div>
 

@@ -25,17 +25,17 @@ export default async function ExpForm() {
   return (
     <form className="w-1/2 space-y-2" action={updateConfig} >
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="cooldown">Cooldown</label>
+        <label htmlFor="cooldown">Время между наградами</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="cooldown" defaultValue={guild.exp.cooldown} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="min">Minimum value</label>
+        <label htmlFor="min">Минимальная награда</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="number" name="min" defaultValue={guild.exp.min} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="max">Maximum value</label>
+        <label htmlFor="max">Максимальная награда</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="number" name="max" defaultValue={guild.exp.max} />
       </div>
 

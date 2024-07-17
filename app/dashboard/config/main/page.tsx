@@ -25,7 +25,7 @@ export default async function MainForm() {
   return (
     <form className="w-1/2 space-y-2" action={updateConfig} >
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="language">Language</label>
+        <label htmlFor="language">Язык бота</label>
         <select className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" name="language" defaultValue={guild.language}>
           <option value="ru">Русский</option>
           <option value="en">English</option>
@@ -33,17 +33,17 @@ export default async function MainForm() {
       </div>
 
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="logChannel">Log Channel ID</label>
+        <label htmlFor="logChannel">ID канала для логов</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="logChannel" defaultValue={guild.logChannel} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="embedColor">Embed Color</label>
+        <label htmlFor="embedColor">Цвет встроенных сообщений</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="embedColor" defaultValue={guild.embedColor} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="memberRoleId">Member Role ID</label>
+        <label htmlFor="memberRoleId">ID основной роли участников</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="memberRoleId" defaultValue={guild.memberRoleId} />
       </div>
 

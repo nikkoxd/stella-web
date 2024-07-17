@@ -25,12 +25,12 @@ export default async function ReactionsForm() {
   return (
     <form className="w-1/2 space-y-2" action={updateConfig} >
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="yes">Yes</label>
+        <label htmlFor="yes">Да</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="yes" defaultValue={guild.reactions.yes} />
       </div>
 
       <div className="grid grid-cols-2 items-center">
-        <label htmlFor="no">No</label>
+        <label htmlFor="no">Нет</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="no" defaultValue={guild.reactions.no} />
       </div>
 
