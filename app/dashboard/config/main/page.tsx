@@ -14,7 +14,7 @@ export default async function MainForm() {
     const host = headers().get("host");
     const protocol = process?.env.NODE_ENV==="development"?"http":"https";
 
-    const response = await fetch(`${protocol}://${host}/api/config`, {
+    const response = await fetch(`${protocol}://${host}/api/config/main`, {
       method: "POST",
       body: formData,
     });

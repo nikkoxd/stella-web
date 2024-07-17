@@ -6,25 +6,18 @@ export async function POST(request: Request) {
 
   const formData = await request.formData();
 
-  const language = formData.get("language");
-  const logChannel = formData.get("logChannel");
-  const embedColor = formData.get("embedColor");
-  const memberRoleId = formData.get("memberRoleId");
+  const yes = formData.get("yes");
+  const no = formData.get("no");
 
   const GUILD_ID = process.env.GUILD_ID!;
-
-  console.log(language);
-  console.log(logChannel);
-  console.log(embedColor);
-  console.log(memberRoleId);
 
   try {
     const guild = await Guild.findOne({ id: GUILD_ID });
     await guild.updateOne({
-      language: language,
-      logChannel: logChannel,
-      embedColor: embedColor,
-      memberRoleId: memberRoleId,
+      reactions: {
+        yes: yes,
+        no: no,
+      }
     });
     return new Response('Guild updated', {
       status: 200
