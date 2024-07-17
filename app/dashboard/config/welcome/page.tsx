@@ -23,7 +23,7 @@ export default async function WelcomeForm() {
   };
 
   return (
-    <form className="w-1/2 space-y-2" action={updateConfig} >
+    <form className="lg:w-1/2 space-y-2" action={updateConfig} >
       <div className="grid grid-cols-2 items-center">
         <label htmlFor="channelId">ID канала</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="channelId" defaultValue={guild.welcome.channelId} />

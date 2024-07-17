@@ -44,7 +44,7 @@ export default async function ConfigLayout({ children }: { children: React.React
   return (
     <>
       <h1 className="text-2xl font-bold">Конфиг сервера</h1>
-      <nav className="mb-2 flex items-center gap-2">
+      <nav className="mb-2 flex items-center gap-2 flex-wrap">
         <Link href="/dashboard/config/main" className="underline">Основное</Link>
         <Link href="/dashboard/config/welcome" className="underline">Приветствия</Link>
         <Link href="/dashboard/config/reactions" className="underline">Голосования</Link>

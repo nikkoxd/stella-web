@@ -36,23 +36,28 @@ export default async function Header() {
   const imageURL = `https://cdn.discordapp.com/avatars/${userID}/${imageHash}.png`;
 
   return (
-    <header className="p-2 flex items-center justify-between border-b-2 border-current">
-      <div className="flex items-center gap-2">
-        <Image src="/stella.png" width={50} height={50} className="rounded-full" alt="Stella logo" />
-        <div>
-          <p className="mr-4 text-xl font-bold">Панель управления</p>
-          <nav className="flex items-center gap-2">
-            <Link className="underline" href="/dashboard/config">Конфиг сервера</Link>
-          </nav>
+    <header className="p-2 border-b-2 border-current">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Image src="/stella.png" width={50} height={50} className="rounded-full" alt="Stella logo" />
+          <div>
+            <p className="mr-4 text-xl font-bold">Панель управления</p>
+            <nav className="hidden sm:flex items-center gap-2">
+              <Link className="underline" href="/dashboard/config">Конфиг сервера</Link>
+            </nav>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="text-right">
+            <p>@{userData.username}</p>
+            <Link className="underline" href="/api/auth/discord/revoke">Выйти</Link>
+          </div>
+          <Image src={imageURL} width={50} height={50} className="rounded-full" alt="User avatar" />
         </div>
       </div>
-      <div className="flex items-center gap-2">
-        <div className="text-right">
-          <p>@{userData.username}</p>
-          <Link className="underline" href="/api/auth/discord/revoke">Выйти</Link>
-        </div>
-        <Image src={imageURL} width={50} height={50} className="rounded-full" alt="User avatar" />
-      </div>
+      <nav className="flex sm:hidden items-center gap-2">
+        <Link className="underline" href="/dashboard/config">Конфиг сервера</Link>
+      </nav>
     </header>
   );
 };

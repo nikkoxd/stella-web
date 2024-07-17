@@ -23,7 +23,7 @@ export default async function CoinsForm() {
   };
 
   return (
-    <form className="w-1/2 space-y-2" action={updateConfig} >
+    <form className="lg:w-1/2 space-y-2" action={updateConfig} >
       <div className="grid grid-cols-2 items-center">
         <label htmlFor="cooldown">Время между наградами</label>
         <input className="px-2 py-1 bg-white dark:bg-black border border-gray-400 rounded" type="text" name="cooldown" defaultValue={guild.coins.cooldown} />
