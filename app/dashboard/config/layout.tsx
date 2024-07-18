@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import NoPermissions from "../no_permissions";
 import { cookies } from "next/headers";
-import { Guild } from "@/app/types/guild";
+import { Guild } from "@/types/guild";
 
 export default async function ConfigLayout({ children }: { children: React.ReactNode }) {
   async function getUserGuildsData(accessToken: string) {
