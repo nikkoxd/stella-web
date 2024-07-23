@@ -1,66 +1,71 @@
 import Embed from "@/types/embed"
+import FieldForm, { FieldProps } from "./field";
+import { useState } from "react";
+import { Field, FieldArray, FieldArrayRenderProps, FormikErrors, FormikTouched } from "formik";
+import { FormValues } from "./page";
 
 export interface EmbedProps extends Embed {
-  index: number
-  onDelete: (index: number) => void
+  index: number,
+  arrayHelpers: FieldArrayRenderProps,
+  values: FormValues,
+  errors: FormikErrors<FormValues>,
+  touched: FormikTouched<FormValues>,
 }
 
-export default function EmbedForm({ index, onDelete, author, body, images, footer, fields }: EmbedProps) {
+export default function EmbedForm({ index, arrayHelpers, values, errors, touched }: EmbedProps) {
   return (
     <div className="p-2 border border-current rounded">
       <div className="flex items-center gap-2">
         <p>Embed {index}</p>
-        <button type="button" onClick={() => onDelete(index)} className="underline">Удалить</button>
+        <button type="button" onClick={() => arrayHelpers.remove(index)} className="underline">Удалить</button>
       </div>
 
       <div className="space-y-2">
         <div className="author space-y-2">
           <p>Author</p>
-          <input name="name" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Name" />
+          <Field name={`embeds[${index}].author.name`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Name" />
           <div className="grid grid-cols-2 gap-2">
-            <input name="url" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="URL" />
-            <input name="icon_url" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Icon URL" />
+            <Field name={`embeds[${index}].author.url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="URL" />
+            <Field name={`embeds[${index}].author.icon_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Icon URL" />
           </div>
         </div>
 
         <div className="body space-y-2">
           <p>Body</p>
-          <input name="title" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Title" />
-          <textarea name="description" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" placeholder="Description" />
+          <Field name={`embeds[${index}].body.title`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Title" />
+          <Field as="textarea" name={`embeds[${index}].body.description`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" placeholder="Description" />
           <div className="grid grid-cols-2 gap-2">
-            <input name="url" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="URL" />
-            <input name="color" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="color" />
+            <Field name={`embeds[${index}].body.url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="URL" />
+            <Field name={`embeds[${index}].body.color`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="color" />
           </div>
         </div>
 
         <div className="images space-y-2">
           <p>Images</p>
-          <input name="image_url" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Image URL" />
-          <input name="thumbnail_url" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Thumbnail URL" />
+          <Field name={`embeds[${index}].images.image_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Image URL" />
+          <Field name={`embeds[${index}].images.thumbnail_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Thumbnail URL" />
         </div>
 
         <div className="footer space-y-2">
           <p>Footer</p>
-          <input name="text" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Text" />
+          <Field name={`embeds[${index}].footer.text`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Text" />
           <div className="grid grid-cols-2 gap-2">
-            <input name="icon_url" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Icon URL" />
-            <input name="timestamp" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="date" placeholder="Timestamp" />
+            <Field name={`embeds[${index}].footer.icon_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Icon URL" />
+            <Field name={`embeds[${index}].footer.timestamp`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="date" placeholder="Timestamp" />
           </div>
         </div>
 
-        <div className="fields space-y-2">
-          <p>Fields</p>
-          <div className="field space-y-2">
-            <div className="grid grid-cols-2 gap-2">
-              <input name="name" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Name" />
-              <div>
-                <input name="inline" type="checkbox" />
-                <label htmlFor="inline">Inline?</label>
-              </div>
+        <FieldArray name={`embeds[${index}].fields`} render={arrayHelpers => (
+          <div>
+            <div className="flex gap-2">
+              <p>Fields</p>
+              <button type="button" onClick={() => arrayHelpers.push({ name: "" })} className="underline">Добавить</button>
             </div>
-            <input name="value" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Value" />
+            {values.embeds[index].fields?.map((field, fieldIndex) => (
+              <FieldForm key={fieldIndex} index={fieldIndex} embedIndex={index} arrayHelpers={arrayHelpers} />
+            ))}
           </div>
-        </div>
+        )} />
       </div>
     </div>
   )
