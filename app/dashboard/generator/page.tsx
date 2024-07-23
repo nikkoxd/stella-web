@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import AttachmentForm, { AttachmentProps } from "./attachment"
-import EmbedForm, { EmbedProps } from "./embed"
+import AttachmentForm from "./attachment"
+import EmbedForm from "./embed"
 import Embed from "@/types/embed";
 import { Field, FieldArray, Form, Formik, FormikErrors } from "formik";
 
@@ -23,16 +22,18 @@ export default function Generator() {
     console.log(data);
   }
 
+  const initialValues: FormValues = {
+    channelId: "",
+    message: "",
+    embeds: [],
+    attachments: [],
+  };
+
   return (
     <>
       <h1 className="text-2xl font-bold">Генератор сообщений</h1>
       <Formik
-        initialValues={{
-          channelId: "",
-          message: "",
-          embeds: [],
-          attachments: [],
-        }}
+        initialValues={initialValues}
         validate={(values: FormValues) => {
           let errors: FormikErrors<FormValues> = {};
 
@@ -77,7 +78,7 @@ export default function Generator() {
                   <button type="button" onClick={() => arrayHelpers.push("")} className="underline">Добавить</button>
                 </div>
                 { values.attachments.map((_, index) => (
-                  <AttachmentForm key={index} index={index} arrayHelpers={arrayHelpers} url="" />
+                  <AttachmentForm key={index} index={index} arrayHelpers={arrayHelpers} />
                 ))}
               </div>
             )} />

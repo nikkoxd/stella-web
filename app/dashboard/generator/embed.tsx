@@ -1,10 +1,8 @@
-import Embed from "@/types/embed"
-import FieldForm, { FieldProps } from "./field";
-import { useState } from "react";
+import FieldForm from "./field";
 import { Field, FieldArray, FieldArrayRenderProps, FormikErrors, FormikTouched } from "formik";
 import { FormValues } from "./page";
 
-export interface EmbedProps extends Embed {
+export interface EmbedProps {
   index: number,
   arrayHelpers: FieldArrayRenderProps,
   values: FormValues,
@@ -59,10 +57,10 @@ export default function EmbedForm({ index, arrayHelpers, values, errors, touched
           <div>
             <div className="flex gap-2">
               <p>Fields</p>
-              <button type="button" onClick={() => arrayHelpers.push({ name: "" })} className="underline">Добавить</button>
+              <button type="button" onClick={() => arrayHelpers.push({ name: "", inline: false, value: "" })} className="underline">Добавить</button>
             </div>
-            {values.embeds[index].fields?.map((field, fieldIndex) => (
-              <FieldForm key={fieldIndex} index={fieldIndex} embedIndex={index} arrayHelpers={arrayHelpers} />
+            {values.embeds[index].fields?.map((_, fieldIndex) => (
+              <FieldForm key={fieldIndex} index={fieldIndex} embedIndex={index} arrayHelpers={arrayHelpers} values={values} />
             ))}
           </div>
         )} />
