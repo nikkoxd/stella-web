@@ -4,6 +4,7 @@ import AttachmentForm from "./attachment"
 import EmbedForm from "./embed"
 import Embed from "@/types/embed";
 import { Field, FieldArray, Form, Formik, FormikErrors } from "formik";
+import * as Yup from "yup";
 
 export interface FormValues {
   channelId: string,
@@ -29,23 +30,63 @@ export default function Generator() {
     attachments: [],
   };
 
+  const embedSchema = Yup.object().shape({
+    channelId: Yup.string()
+      .min(17, "ID should be minimum 17 characters")
+      .max(18, "ID should be no more than 18 characters")
+      .matches(/^\d+$/, "ID can only contain numbers")
+      .required("Channel ID required"),
+    message: Yup.string()
+      .length(2000, "Message should be no more then 2000 characters"),
+    embeds: Yup.array()
+      .of(Yup.object().shape({
+        author: Yup.object().shape({
+          name: Yup.string()
+            .length(256, "Author name should be no more than 256 characters"),
+          url: Yup.string()
+            .matches(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, "Value should be a URL"),
+          icon_url: Yup.string(),
+        }),
+        body: Yup.object().shape({
+          title: Yup.string()
+            .length(256, "Title should be no more than 256 characters"),
+          description: Yup.string()
+            .length(4096, "Description should be no more than 4096 characters"),
+          url: Yup.string()
+            .matches(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, "Value should be a URL"),
+          color: Yup.string(),
+        }),
+        images: Yup.object().shape({
+          image_url: Yup.string()
+            .matches(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, "Value should be a URL"),
+          thumbnail_url: Yup.string()
+            .matches(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, "Value should be a URL"),
+        }),
+        footer: Yup.object().shape({
+          text: Yup.string()
+            .length(2048, "Footer text should be no more than 2048 characters"),
+          icon_url: Yup.string()
+            .matches(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, "Value should be a URL"),
+          timestamp: Yup.string(),
+        }),
+        fields: Yup.array()
+          .of(Yup.object().shape({
+            name: Yup.string()
+              .length(256, "Field name should be no more than 256 characters"),
+            inline: Yup.boolean(),
+            value: Yup.string()
+              .length(1024, "Field value should be no more than 1024 characters"),
+          }))
+          .max(25, "There can be no more than 25 fields in one embed"),
+      }))
+  });
+
   return (
     <>
       <h1 className="text-2xl font-bold">Генератор сообщений</h1>
       <Formik
         initialValues={initialValues}
-        validate={(values: FormValues) => {
-          let errors: FormikErrors<FormValues> = {};
-
-          if (!values.channelId) {
-            errors.channelId = "Channel ID Required";
-          }
-          if (!(values.message || values.embeds.length)) {
-            errors.message = "Either Message or any number of Embeds required";
-          }
-
-          return errors;
-        }}
+        validationSchema={embedSchema}
         onSubmit={(values: FormValues) => {
           console.log(values);
         }}
@@ -62,7 +103,29 @@ export default function Generator() {
                 <div className="flex items-center gap-2">
                   <h2 className="font-bold">Встроенные сообщения</h2>
                   <p>({ values.embeds.length } / 10)</p>
-                  <button type="button" onClick={() => arrayHelpers.push({})} className="underline">Добавить</button>
+                  <button type="button" onClick={() => arrayHelpers.push({
+                    author: {
+                      name: "",
+                      url: "",
+                      icon_url: "",
+                    },
+                    body: {
+                      title: "",
+                      description: "",
+                      url: "",
+                      color: "",
+                    },
+                    images: {
+                      image_url: "",
+                      thumbnail_url: "",
+                    },
+                    footer: {
+                      text: "",
+                      icon_url: "",
+                      timestamp: "",
+                    },
+                    fields: []
+                  })} className="underline">Добавить</button>
                 </div>
                 { values.embeds.map((_, index) => (
                   <EmbedForm key={index} index={index} arrayHelpers={arrayHelpers} values={values} errors={errors} touched={touched} />

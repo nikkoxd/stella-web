@@ -22,6 +22,7 @@ export default function EmbedForm({ index, arrayHelpers, values, errors, touched
         <div className="author space-y-2">
           <p>Author</p>
           <Field name={`embeds[${index}].author.name`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Name" />
+          {touched.message && errors.message && <div className="text-red-500">{errors.message}</div>}
           <div className="grid grid-cols-2 gap-2">
             <Field name={`embeds[${index}].author.url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="URL" />
             <Field name={`embeds[${index}].author.icon_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Icon URL" />
