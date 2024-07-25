@@ -1,4 +1,4 @@
-import { Field, FieldArrayRenderProps } from "formik";
+import { ErrorMessage, Field, FieldArrayRenderProps } from "formik";
 
 export interface AttachmentProps {
   index: number,
@@ -14,6 +14,7 @@ export default function AttachmentForm({ index, arrayHelpers }: AttachmentProps)
       </div>
 
       <Field name={`attachments[${index}]`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Image URL" />
+      <ErrorMessage name={`attachments[${index}]`} />
     </div>
   )
 }
