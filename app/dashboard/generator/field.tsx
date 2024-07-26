@@ -1,4 +1,5 @@
-import { ErrorMessage, Field, FieldArrayRenderProps } from "formik";
+import ErrorMessage from "@/app/errorMessage";
+import { Field, FieldArrayRenderProps } from "formik";
 
 export interface FieldProps {
   index: number,

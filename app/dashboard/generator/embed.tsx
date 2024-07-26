@@ -1,6 +1,7 @@
 import FieldForm from "./field";
-import { ErrorMessage, Field, FieldArray, FieldArrayRenderProps, FormikErrors, FormikTouched } from "formik";
+import { Field, FieldArray, FieldArrayRenderProps } from "formik";
 import { FormValues } from "./page";
+import ErrorMessage from "@/app/errorMessage";
 
 export interface EmbedProps {
   index: number,
