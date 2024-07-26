@@ -38,7 +38,11 @@ export default function Generator() {
       .matches(/^\d+$/, "ID can only contain numbers")
       .required("Channel ID required"),
     message: Yup.string()
-      .max(2000, "Message should be no more then 2000 characters"),
+      .max(2000, "Message should be no more then 2000 characters")
+      .when("embeds", {
+        is: (val: Array<Embed>) => val.length === 0,
+        then: (schema) => schema.required("You should either provide a message or any number of embeds"),
+      }),
     embeds: Yup.array()
       .of(Yup.object().shape({
         author: Yup.object().shape({
@@ -51,7 +55,25 @@ export default function Generator() {
         }),
         body: Yup.object().shape({
           title: Yup.string()
-            .max(256, "Title should be no more than 256 characters"),
+            .max(256, "Title should be no more than 256 characters")
+            .test(
+              "no-values",
+              "Please provide a title if there are no other values",
+              (value, context) => {
+                if (!context.from) return;
+
+                const { author, body, images, footer, fields } = context.from[1].value;
+
+                const isEmptyObject = (obj: object) => Object.values(obj).every(value => value === undefined || value === false);
+                const allEmpty = [author, body, images, footer].every(isEmptyObject) && fields.every(isEmptyObject);
+
+                if (allEmpty && !value) {
+                  return false;
+                }
+
+                return true;
+              }
+            ),
           description: Yup.string()
             .max(4096, "Description should be no more than 4096 characters"),
           url: Yup.string()
@@ -130,7 +152,7 @@ export default function Generator() {
                   })} className="underline">Добавить</button>
                 </div>
                 { values.embeds.map((_, index) => (
-                  <EmbedForm key={index} index={index} arrayHelpers={arrayHelpers} values={values} errors={errors} touched={touched} />
+                  <EmbedForm key={index} index={index} arrayHelpers={arrayHelpers} values={values} />
                 ))}
               </div>
             )} />
