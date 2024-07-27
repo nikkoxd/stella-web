@@ -77,7 +77,7 @@ export default function EmbedForm({ index, arrayHelpers, values }: EmbedProps) {
               <button type="button" onClick={() => arrayHelpers.push({ name: "", inline: false, value: "" })} className="underline">Добавить</button>
             </div>
             {values.embeds[index].fields?.map((_, fieldIndex) => (
-              <FieldForm key={fieldIndex} index={fieldIndex} embedIndex={index} arrayHelpers={arrayHelpers} values={values} />
+              <FieldForm key={fieldIndex} index={fieldIndex} embedIndex={index} arrayHelpers={arrayHelpers} />
             ))}
           </div>
         )} />
