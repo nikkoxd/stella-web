@@ -111,6 +111,10 @@ export default function Message() {
             body: JSON.stringify(values),
           })
 
+          if (res.ok) {
+            alert(res.body);
+          }
+
           return res.status;
         }}
       >

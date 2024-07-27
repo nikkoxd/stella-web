@@ -19,7 +19,9 @@ export default async function RoomsForm() {
       body: formData,
     });
 
-    console.log(response.status);
+    if (response.ok) {
+      alert(response.body);
+    }
   };
 
   return (
