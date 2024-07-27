@@ -25,7 +25,7 @@ export default function Generator() {
   const embedSchema = Yup.object().shape({
     channelId: Yup.string()
       .min(17, "ID should be minimum 17 characters")
-      .max(18, "ID should be no more than 18 characters")
+      .max(19, "ID should be no more than 19 characters")
       .matches(/^\d+$/, "ID can only contain numbers")
       .required("Channel ID required"),
     message: Yup.string()
@@ -105,6 +105,9 @@ export default function Generator() {
         onSubmit={async (values: FormValues) => {
           const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/message`, {
             method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify(values),
           })
 
