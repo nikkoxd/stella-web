@@ -1,5 +1,5 @@
 import { Field, FormikProps, getIn } from "formik";
-import { FormValues } from "./dashboard/generator/page";
+import { FormValues } from "./dashboard/generator/message";
 
 export default function ErrorMessage({ name }: { name: string }) {
   return (
