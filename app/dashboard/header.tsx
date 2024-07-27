@@ -44,6 +44,7 @@ export default async function Header() {
             <p className="sm:mr-4 text-xl font-bold">Панель управления</p>
             <nav className="hidden sm:flex items-center gap-2">
               <Link className="underline" href="/dashboard/config">Конфиг сервера</Link>
+              <Link className="underline" href="/dashboard/generator">Генератор сообщений</Link>
             </nav>
           </div>
         </div>
