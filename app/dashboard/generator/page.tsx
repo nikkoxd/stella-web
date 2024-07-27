@@ -15,15 +15,6 @@ export interface FormValues {
 };
 
 export default function Generator() {
-  function handleSubmit(formData: FormData) {
-    const data = {
-      channelId: formData.get("channelId"),
-      message: formData.get("message"),
-    };
-
-    console.log(data);
-  }
-
   const initialValues: FormValues = {
     channelId: "",
     message: "",
@@ -111,8 +102,13 @@ export default function Generator() {
       <Formik
         initialValues={initialValues}
         validationSchema={embedSchema}
-        onSubmit={(values: FormValues) => {
-          console.log(values);
+        onSubmit={async (values: FormValues) => {
+          const res = await fetch(`${process.env.API_URI}/api/message`, {
+            method: "POST",
+            body: JSON.stringify(values),
+          })
+
+          return res.status;
         }}
       >
         {({ values, errors, touched }) => (
