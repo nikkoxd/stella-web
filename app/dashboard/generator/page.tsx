@@ -103,8 +103,7 @@ export default function Generator() {
         initialValues={initialValues}
         validationSchema={embedSchema}
         onSubmit={async (values: FormValues) => {
-          console.log(process.env.NEXT_PUBLIC_API_URI);
-          const res = await fetch(`${process.env.API_URI}/api/message`, {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/message`, {
             method: "POST",
             body: JSON.stringify(values),
           })
