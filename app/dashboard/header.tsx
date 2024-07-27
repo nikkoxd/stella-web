@@ -51,7 +51,7 @@ export default async function Header() {
         <div className="flex items-center gap-2">
           <div className="text-right">
             <p className="w-12 sm:w-auto truncate">@{userData.username}</p>
-            <Link className="underline" href="/api/auth/discord/revoke">Выйти</Link>
+            <Link className="underline" href="/api/auth/discord/revoke" prefetch={false} >Выйти</Link>
           </div>
           <Image src={imageURL} width={50} height={50} className="rounded-full" alt="User avatar" />
         </div>
