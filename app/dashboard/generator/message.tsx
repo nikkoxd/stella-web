@@ -10,7 +10,7 @@ import * as Yup from "yup";
 export interface FormValues {
   channelId: string,
   message: string,
-  embeds: Embed[], 
+  embeds: Embed[],
   attachments: string[],
 };
 
@@ -120,16 +120,16 @@ export default function Message() {
       >
         {({ values }) => (
           <Form className="mt-2 lg:w-1/2 space-y-2">
-            <Field name="channelId" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Channel ID" />
+            <Field name="channelId" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="ID канала" />
             <ErrorMessage name="channelId" />
-            <Field as="textarea" name="message" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" placeholder="Message" />
+            <Field as="textarea" name="message" className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" placeholder="Сообщение" />
             <ErrorMessage name="message" />
 
             <FieldArray name="embeds" render={arrayHelpers => (
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="font-bold">Встроенные сообщения</h2>
-                  <p>({ values.embeds.length } / 10)</p>
+                  <p>({values.embeds.length} / 10)</p>
                   <button type="button" onClick={() => arrayHelpers.push({
                     author: {
                       name: "",
@@ -154,7 +154,7 @@ export default function Message() {
                     fields: []
                   })} className="underline">Добавить</button>
                 </div>
-                { values.embeds.map((_, index) => (
+                {values.embeds.map((_, index) => (
                   <EmbedForm key={index} index={index} arrayHelpers={arrayHelpers} values={values} />
                 ))}
               </div>
@@ -164,10 +164,10 @@ export default function Message() {
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="font-bold">Вложения</h2>
-                  <p>({ values.attachments.length } / 10)</p>
+                  <p>({values.attachments.length} / 10)</p>
                   <button type="button" onClick={() => arrayHelpers.push("")} className="underline">Добавить</button>
                 </div>
-                { values.attachments.map((_, index) => (
+                {values.attachments.map((_, index) => (
                   <AttachmentForm key={index} index={index} arrayHelpers={arrayHelpers} />
                 ))}
               </div>

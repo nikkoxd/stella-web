@@ -13,14 +13,14 @@ export default function EmbedForm({ index, arrayHelpers, values }: EmbedProps) {
   return (
     <div className="p-2 border border-current rounded">
       <div className="flex items-center gap-2">
-        <p>Embed {index}</p>
+        <p>Встроенное сообщение {index}</p>
         <button type="button" onClick={() => arrayHelpers.remove(index)} className="underline">Удалить</button>
       </div>
 
       <div className="space-y-2">
         <div className="author space-y-2">
-          <p>Author</p>
-          <Field name={`embeds[${index}].author.name`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Name" />
+          <p>Автор</p>
+          <Field name={`embeds[${index}].author.name`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Имя" />
           <ErrorMessage name={`embeds[${index}].author.name`} />
           <div className="grid grid-cols-2 gap-2">
             <div>
@@ -28,18 +28,18 @@ export default function EmbedForm({ index, arrayHelpers, values }: EmbedProps) {
               <ErrorMessage name={`embeds[${index}].author.url`} />
             </div>
             <div>
-              <Field name={`embeds[${index}].author.icon_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Icon URL" />
+              <Field name={`embeds[${index}].author.icon_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="URL иконки" />
               <ErrorMessage name={`embeds[${index}].author.icon_url`} />
             </div>
           </div>
         </div>
 
         <div className="body space-y-2">
-          <p>Body</p>
-          <Field name={`embeds[${index}].body.title`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Title" />
+          <p>Тело</p>
+          <Field name={`embeds[${index}].body.title`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Заголовок" />
           <ErrorMessage name={`embeds[${index}].body.title`} />
 
-          <Field as="textarea" name={`embeds[${index}].body.description`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" placeholder="Description" />
+          <Field as="textarea" name={`embeds[${index}].body.description`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" placeholder="Описание" />
           <ErrorMessage name={`embeds[${index}].body.description`} />
 
           <div className="grid grid-cols-2 gap-2">
@@ -51,21 +51,21 @@ export default function EmbedForm({ index, arrayHelpers, values }: EmbedProps) {
         </div>
 
         <div className="images space-y-2">
-          <p>Images</p>
-          <Field name={`embeds[${index}].images.image_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Image URL" />
+          <p>Изображения</p>
+          <Field name={`embeds[${index}].images.image_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="URL изображения" />
           <ErrorMessage name={`embeds[${index}].images.image_url`} />
-          <Field name={`embeds[${index}].images.thumbnail_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Thumbnail URL" />
+          <Field name={`embeds[${index}].images.thumbnail_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="URL миниатюры" />
           <ErrorMessage name={`embeds[${index}].images.thumbnail_url`} />
         </div>
 
         <div className="footer space-y-2">
-          <p>Footer</p>
-          <Field name={`embeds[${index}].footer.text`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Text" />
+          <p>Подвал</p>
+          <Field name={`embeds[${index}].footer.text`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Текст" />
           <ErrorMessage name={`embeds[${index}].footer.text`} />
           <div className="grid grid-cols-2 gap-2">
-            <Field name={`embeds[${index}].footer.icon_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="Icon URL" />
+            <Field name={`embeds[${index}].footer.icon_url`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="text" placeholder="URL иконки" />
             <ErrorMessage name={`embeds[${index}].footer.icon_url`} />
-            <Field name={`embeds[${index}].footer.timestamp`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="date" placeholder="Timestamp" />
+            <Field name={`embeds[${index}].footer.timestamp`} className="px-2 py-1 w-full bg-white dark:bg-black border border-gray-400 rounded" type="date" placeholder="Время" />
             <ErrorMessage name={`embeds[${index}].footer.timestamp`} />
           </div>
         </div>
@@ -73,7 +73,7 @@ export default function EmbedForm({ index, arrayHelpers, values }: EmbedProps) {
         <FieldArray name={`embeds[${index}].fields`} render={arrayHelpers => (
           <div>
             <div className="flex gap-2">
-              <p>Fields</p>
+              <p>Поля</p>
               <button type="button" onClick={() => arrayHelpers.push({ name: "", inline: false, value: "" })} className="underline">Добавить</button>
             </div>
             {values.embeds[index].fields?.map((_, fieldIndex) => (
