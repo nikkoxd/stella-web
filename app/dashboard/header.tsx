@@ -57,6 +57,7 @@ export default async function Header() {
       </div>
       <nav className="flex sm:hidden items-center gap-2">
         <Link className="underline" href="/dashboard/config">Конфиг сервера</Link>
+        <Link className="underline" href="/dashboard/generator">Генератор сообщений</Link>
       </nav>
     </header>
   );
