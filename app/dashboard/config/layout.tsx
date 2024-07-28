@@ -14,8 +14,7 @@ export default async function ConfigLayout({ children }: { children: React.React
     });
 
     if (!response.ok) {
-      if (response.status == 401 || response.status == 403 || response.status == 429) {
-        console.log(response.status);
+      if (response.status == 429) {
         redirect("/error/too_many_requests");
       }
       redirect("/api/auth/discord/redirect");
@@ -52,7 +51,7 @@ export default async function ConfigLayout({ children }: { children: React.React
         <Link href="/dashboard/config/exp" className="underline">Опыт</Link>
         <Link href="/dashboard/config/rooms" className="underline">VIP-Зал</Link>
       </nav>
-      { children }
+      {children}
     </>
   )
 }
