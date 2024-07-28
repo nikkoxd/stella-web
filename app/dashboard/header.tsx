@@ -12,8 +12,7 @@ export default async function Header() {
     })
 
     if (!response.ok) {
-      if (response.status == 401 || response.status == 403 || response.status == 429) {
-        console.log(response.status);
+      if (response.status == 429) {
         redirect("/error/too_many_requests");
       }
       redirect("/api/auth/discord/redirect");
